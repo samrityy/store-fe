@@ -11,13 +11,13 @@
                     <h3 class="text-lg">
                         Login to your account
                     </h3>
-                    <form action="">
+                    <form submit.prevent="submitForm">
                         <label for="email" class="block mb-2 text-left text-gray-700 font-bold">Email:</label>
-                        <input type="email" id="password" name="password" placeholder="Enter your email" class="block w-full mb-6 px-4 py-2 border border-gray-300 rounded-md focus:outline-none
+                        <input v-model="email" type="email" id="password" name="password" placeholder="Enter your email" class="block w-full mb-6 px-4 py-2 border border-gray-300 rounded-md focus:outline-none
                             focus:border-green-400" required>
             
                         <label for="password" class="block mb-2 text-left text-gray-700 font-bold">Password:</label>
-                        <input type="password" id="password" name="password" placeholder="Enter your Password" class="block w-full mb-6 px-4 py-2 border border-gray-300 rounded-md focus:outline-none
+                        <input v-model="password" type="password" id="password" name="password" placeholder="Enter your Password" class="block w-full mb-6 px-4 py-2 border border-gray-300 rounded-md focus:outline-none
                             focus:border-green-400" required>
             
                         <div class="flex justify-center items-center">
