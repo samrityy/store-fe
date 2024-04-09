@@ -11,7 +11,7 @@
                     <h3 class="text-lg">
                         Login to your account
                     </h3>
-                    <form submit.prevent="submitForm">
+                    <form @submit.prevent="submitForm" method="post"> 
                         <label for="email" class="block mb-2 text-left text-gray-700 font-bold">Email:</label>
                         <input v-model="email" type="email" id="password" name="password" placeholder="Enter your email" class="block w-full mb-6 px-4 py-2 border border-gray-300 rounded-md focus:outline-none
                             focus:border-green-400" required>
@@ -38,8 +38,7 @@
     </layout-div>
  </template>
    
-<script setup>
-import { useLoginForm } from '/home/smrity/store-fe/src/composables/useLoginForm.js';
-   
-const { email, password, submitForm } = useLoginForm();
-</script>
+   <script setup>
+   import { useLoginForm } from '@/composables/useLoginForm.js';
+   const { email, password, submitForm, data, error } = useLoginForm();
+   </script>
