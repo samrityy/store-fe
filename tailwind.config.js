@@ -4,6 +4,9 @@ module.exports = {
   content: [],
   theme: {
     extend: {
+      colors:{
+        'custom-brown': '#A79277',
+      }
     },
   },
   plugins: [],
