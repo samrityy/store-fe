@@ -1,16 +1,31 @@
 import { createRouter, createWebHistory } from 'vue-router';
 import LoginPage from '@/pages/LoginPage.vue';
 import Register from '@/pages/Register.vue';
+import MainLayout from '@/layout/MainLayout.vue';
 
 // import DashboardPage from './components/pages/DashboardPage';
 
+const routes = [
+  {
+  path: '',
+  component:MainLayout,
+  children:[
+  {
+    path: '/user/login',
+    component: LoginPage,
+    name: 'Login', 
+  },
+  {
+    path: '/user/register',
+    component: Register, 
+    name: 'Register',
+  },
+]
+  }
+];
 const router = createRouter({
   history: createWebHistory(),
-  routes: [
-    { path: '/user/login', component: LoginPage },
-    { path: '/user/register', component: Register },
-//  { path: '/dashboard', component: DashboardPage },
-  ],
+  routes
 });
 
 export default router;

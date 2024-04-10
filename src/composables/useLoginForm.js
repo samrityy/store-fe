@@ -2,31 +2,34 @@
 import { ref } from 'vue';
 import { useFetch } from './fetch.js';
 
-export function useLoginForm() {
-  const email = ref('');
-  const password = ref('');
-  const data = ref(null);
-  const error = ref(null);
+export function useLoginForm(){
+  const email=ref('');
+  const password=ref('');
+  const data=ref(null);
+  const error=ref(null);
 
-  const submitForm = () => {
+  const submitForm=async()=>{
     console.log('submitForm');
-    try {
-      const formData = {
-        email: email.value,
-        password: password.value
+    try{
+      const formData={
+        email:email.value,
+        password:password.value
       };
-      const options = {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
+      const options={
+        method:'POST',
+        headers:{
+          'Content-Type':'application/json'
         },
-        body: formData
+        body:JSON.stringify(formData)
       };
-      const { data, error } = useFetch('http://127.0.0.1:8000/user/login/', options)
-      console.log('Login successful!');
-    } catch (error) {
-      console.error('Error in logging in :', error);
+      const {data:responseData,error:responseError}=await useFetch('http://127.0.0.1:8000/user/register/', options);
+      return {responseData, responseError};
+    }
+    catch(err){
+      error.value=err;
+      console.error('Error during login:', err);
+      throw(err);
     }
   };
-  return { email, password, "submitForm" : submitForm, data, error};
+  return { email, password, submitForm};
 }
