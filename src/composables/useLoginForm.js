@@ -23,11 +23,14 @@ export function useLoginForm() {
           },
         body: JSON.stringify(formData)
            };
-        const { data:responseData} = await useFetch('http://127.0.0.1:8000/user/login/', options);
-        data.value = responseData;
+        await useFetch('http://127.0.0.1:8000/user/login/', options).then((res) => {
 
-      console.log('Login  successful!', responseData);
-      return { responseData};
+          data.value = res
+        }).catch((err) => {
+
+          error.value = err
+        })
+      return { data, error};
     
     } catch (err) {
       error.value = err;
