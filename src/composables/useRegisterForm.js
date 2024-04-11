@@ -12,25 +12,26 @@ export function useRegisterForm() {
     console.log('submitForm');
 
     try {
-      const formData = {
-        name: name.value,
-        email: email.value,
-        password: password.value
-      };
+          const formData = {
+          name: name.value,
+          email: email.value,
+          password: password.value
+          };
 
-      const options = {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
+        const options = {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
         body: JSON.stringify(formData)
-      };
-      const { data:responseData, error:responseError}  = await useFetch('http://127.0.0.1:8000/user/register/', options);
-      // debugger
-      data.value = responseData;
-      error.value = responseError;
-      console.log('Registration successful!', responseData, responseError);
-      return { responseData, responseError };
+           };
+        await useFetch('http://127.0.0.1:8000/user/register/', options).then((res) => {
+          data.value = res
+        }).catch((err) => {
+
+          error.value = err
+        })
+      return { data, error};
     
     } catch (err) {
       error.value = err;
