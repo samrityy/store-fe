@@ -6,6 +6,8 @@ module.exports = {
     extend: {
       colors:{
         'custom-brown': '#A79277',
+        'custom-dark':'#83580B',
+        'custom-light':'#FFF2E1',
       }
     },
   },
