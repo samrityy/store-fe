@@ -2,7 +2,7 @@
     <div class="bg-custom-brown h-screen w-screen">
         <div class="p-3">
             <a href="/" class="text-white text-l  p-3">Home</a>
-            <a href="/dashboard" class="text-white text-l  p-3">Products</a>
+            <a href="/products" class="text-white text-l  p-3">Products</a>
             <a href="#" class="text-white text-l  p-3">About</a>
             <a href="/user/login/" class="text-white text-l  p-3">Login</a>
             <a href="/user/register" class="text-white text-2l  p-4">Register</a>
