@@ -36,6 +36,13 @@
    
    <script setup>
    import { useLoginForm } from '@/composables/useLoginForm.js';
+//    import router from '@/router/router.js';
    const { email, password, submitForm} = useLoginForm();
-
+//    const token=localStorage.getItem('token');
+//    if (token) {
+    //    router.push({ name: 'Dashboard' });
+//    }
+//    else {
+    //    console.log('No token found');
+//    }
    </script>
