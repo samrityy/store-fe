@@ -1,6 +1,6 @@
 import { ref } from 'vue';
 import { useFetch } from './fetch.js';
-
+import router from '@/router/router.js';
 export function useLoginForm() {
   const email = ref('');
   const password = ref('');
@@ -10,7 +10,7 @@ export function useLoginForm() {
 
   const submitForm = async () => {
     console.log('submitForm');
-
+  
     try {
           const formData = {
           email: email.value,
@@ -25,11 +25,13 @@ export function useLoginForm() {
         body: JSON.stringify(formData)
            };
         await useFetch('http://127.0.0.1:8000/user/login/', options).then((res) => {
-          token.value = res.token;
-          localStorage.setItem('token', token.value);
-          localStorage.setItem('email', email.value);
-          data.value = res
-          console.log('token')
+            token.value = res.token;
+          if(token.value!=null){
+              localStorage.setItem('token', token.value);
+              localStorage.setItem('email', email.value);
+              router.push({ name: 'Dashboard' });
+              data.value = res
+          }
         }).catch((err) => {
 
           error.value = err
