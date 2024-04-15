@@ -6,6 +6,7 @@ export function useLoginForm() {
   const password = ref('');
   const data = ref(null);
   const error = ref(null);
+  const token=ref(null);
 
   const submitForm = async () => {
     console.log('submitForm');
@@ -24,8 +25,11 @@ export function useLoginForm() {
         body: JSON.stringify(formData)
            };
         await useFetch('http://127.0.0.1:8000/user/login/', options).then((res) => {
-
+          token.value = res.token;
+          localStorage.setItem('token', token.value);
+          localStorage.setItem('email', email.value);
           data.value = res
+          console.log('token')
         }).catch((err) => {
 
           error.value = err
@@ -40,3 +44,5 @@ export function useLoginForm() {
   };
   return {email, password, submitForm};
 }
+
+
