@@ -1,0 +1,22 @@
+<template>
+    <div class="container mx-auto py-8">
+      <h2 class="text-5xl text-white text-center font-semibold mb-4 mx-auto">Cart</h2>
+      <div v-if="data === null" class="text-center">Cart is Null</div>
+      <div v-else-if="error !== null" class="text-center text-red-500">Error: {{ error }}</div>
+      <div v-else class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-1 gap-4">
+        <div v-for="(product, index) in data" :key="index" class="bg-custom-light rounded-lg p-4 shadow-md">
+          <img :src="product.image" :alt="product.title" class="w-16 h-16 object-cover mb-4">
+          <h3 class="text-mg font-semibold mb-2 h-18">{{ product.title }}</h3>
+          <p class="text-gray-800 font-semibold mb-2">${{ product.price }}</p>
+        </div>
+      </div>
+    </div>
+  </template>
+  
+  <script setup>
+  import { useDashboard } from '@/composables/useDashboard.js';
+  console.log('Dashboard');
+  const { data, error} = useDashboard();
+  
+  </script>
+  

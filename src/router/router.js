@@ -3,6 +3,7 @@ import LoginPage from '@/pages/LoginPage.vue';
 import Register from '@/pages/Register.vue';
 import MainLayout from '@/layout/MainLayout.vue';
 import Dashboard from '@/pages/Dashboard.vue';
+import Cart from '@/pages/Cart.vue';
 
 // import DashboardPage from './components/pages/DashboardPage';
 
@@ -25,6 +26,11 @@ const routes = [
     path: '/products',
     component:Dashboard,
     name: 'Dashboard',
+  },
+  {
+    path:'/cart',
+    component:Cart,
+    name:'Cart',
   }
 ]
   }
