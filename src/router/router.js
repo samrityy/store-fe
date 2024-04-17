@@ -3,7 +3,7 @@ import LoginPage from '@/pages/LoginPage.vue';
 import Register from '@/pages/Register.vue';
 import MainLayout from '@/layout/MainLayout.vue';
 import Dashboard from '@/pages/Dashboard.vue';
-import Cart from '@/pages/Cart.vue';
+import Cart from '@/components/Cart.vue';
 
 // import DashboardPage from './components/pages/DashboardPage';
 

@@ -33,10 +33,9 @@ export function useLoginForm() {
               data.value = res
           }
         }).catch((err) => {
-
+          console.log(err, 'error')
           error.value = err
         })
-      return { data, error};
     
     } catch (err) {
       error.value = err;
@@ -44,7 +43,7 @@ export function useLoginForm() {
       throw(err)
     }
   };
-  return {email, password, submitForm};
+  return {email, password, submitForm, error,data};
 }
 
 

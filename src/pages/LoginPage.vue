@@ -1,5 +1,6 @@
 <template>
     <!-- <MainLayout> -->
+        <!-- {{ error }} -->
         <div class="flex items-center justify-center min-h-screen bg-custom-brown">
             <div class="main bg-white rounded-lg shadow-md p-10 transition-transform w-96 text-center">
                 <h1 class="text-custom-brown text-3xl">
@@ -36,13 +37,5 @@
    
    <script setup>
    import { useLoginForm } from '@/composables/useLoginForm.js';
-//    import router from '@/router/router.js';
-   const { email, password, submitForm} = useLoginForm();
-//    const token=localStorage.getItem('token');
-//    if (token) {
-    //    router.push({ name: 'Dashboard' });
-//    }
-//    else {
-    //    console.log('No token found');
-//    }
+   const { email, password, submitForm, error,data} = useLoginForm();
    </script>
