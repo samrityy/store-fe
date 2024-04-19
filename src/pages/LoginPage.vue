@@ -1,6 +1,4 @@
-<template>
-    <!-- <MainLayout> -->
-        <!-- {{ error }} -->
+<!-- <template> 
         <div class="flex items-center justify-center min-h-screen bg-custom-brown">
             <div class="main bg-white rounded-lg shadow-md p-10 transition-transform w-96 text-center">
                 <h1 class="text-custom-brown text-3xl">
@@ -32,10 +30,25 @@
         </p>
     </div>
     </div>
-<!-- </MainLayout> -->
-</template>
+</template>-->
    
+<template>
+    <div class="flex items-center justify-center h-96 bg-custom-brown">
+            <div class="main bg-white rounded-lg shadow-md p-10 transition-transform w-96 text-center">
+                <h1 class="text-custom-brown text-3xl">
+                    Login 
+                </h1>
+                <TextInput v-model="email" label="Email" type="email" placeholder="Enter your email"  />
+                
+                <TextInput v-model="password" label="Password" type="password" placeholder="Enter your password" />
+                <Button buttonText="Login" @click="submitForm" />
+            </div>
+            </div>
+</template>
    <script setup>
    import { useLoginForm } from '@/composables/useLoginForm.js';
    const { email, password, submitForm, error,data} = useLoginForm();
+   import TextInput from '@/components/TextInput.vue';
+   import Button from '@/components/Button.vue';
+   
    </script>
