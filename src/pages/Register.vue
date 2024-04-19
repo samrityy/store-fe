@@ -39,9 +39,11 @@
                 </h1>
                 <TextInput v-model="name" label="Name *" type="name" placeholder="Enter your full name" />
                 <TextInput v-model="email" label="Email *" type="email" placeholder="Enter your email"  />
-                <Error :errorMessage="error.email" v-if="error"/>
+                <div v-if="error && error.email">
+                <Error v-for="emailError in error.email" :key="emailError" :errorMessage="emailError" /></div>
                 <TextInput v-model="password" label="Password *" type="password" placeholder="Enter your password" />
-                <Error :errorMessage="error.password" v-if="error"/>
+                <div v-if="error && error.email">
+                <Error v-for="passwordError in error.password" :key="passwordError" :errorMessage="passwordError" /></div>
                 <Button buttonText="Register" @click="submitForm" />
             </div>
             </div>
