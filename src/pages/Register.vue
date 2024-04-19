@@ -1,4 +1,4 @@
-<template>
+<!-- <template>
         <div class="flex items-center justify-center min-h-screen bg-custom-brown">
             <div class="main bg-white rounded-lg shadow-md p-10 transition-transform w-96 text-center">
                 <h1 class="text-custom-dark text-3xl">
@@ -30,19 +30,39 @@
                     </form>
     </div>
     </div>
- </template>
+ </template> -->
+ <template>
+    <div class="flex items-center justify-center h-100 bg-custom-brown">
+            <div class="main bg-white rounded-lg shadow-md p-10 transition-transform w-96 text-center">
+                <h1 class="text-custom-brown text-3xl">
+                    Register 
+                </h1>
+                <TextInput v-model="name" label="Name *" type="name" placeholder="Enter your full name" />
+                <TextInput v-model="email" label="Email *" type="email" placeholder="Enter your email"  />
+                <Error :errorMessage="error.email" v-if="error"/>
+                <TextInput v-model="password" label="Password *" type="password" placeholder="Enter your password" />
+                <Error :errorMessage="error.password" v-if="error"/>
+                <Button buttonText="Register" @click="submitForm" />
+            </div>
+            </div>
+</template>
 <script setup>
+import {ref,watch} from 'vue';
 import { useRegisterForm } from '@/composables/useRegisterForm.js';
 import router from '@/router/router.js';
-const { name, email, password, submitForm} = useRegisterForm();
-const redirectToLogin = async () => {
-    const {data, error} = await submitForm();
-    if (!error.value) {
-        console.log('Final Data', data.value);
-        router.push({ name: 'Login' });
-    } else {
-        console.log('Final  error', error.value);
-    }
-}
+import TextInput from '@/components/TextInput.vue';
+import Button from '@/components/Button.vue';
+import Error from '@/components/Error.vue';
+const emailerror = ref('');
+const { name, email, password, submitForm, error} = useRegisterForm();
+// const redirectToLogin = async () => {
+//     const {data, error} = await submitForm();
+//     if (!error.value) {
+//         console.log('Final Data', data.value);
+//         router.push({ name: 'Login' });
+//     } else {
+//         console.log('Final  error', error.value);
+//     }
+// }
 </script>
  
