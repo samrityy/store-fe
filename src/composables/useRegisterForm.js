@@ -7,7 +7,6 @@ export function useRegisterForm() {
   const password = ref('');
   const data = ref(null);
   const error = ref(null);
-
   const submitForm = async () => {
     console.log('submitForm');
 
@@ -28,16 +27,18 @@ export function useRegisterForm() {
         await useFetch('http://127.0.0.1:8000/user/register/', options).then((res) => {
           data.value = res
         }).catch((err) => {
-
           error.value = err
+            // console.log('Error during registration:', error.value.email[0]);
+            // console.log('Error during registration:', error.value.password);
         })
+        console.log('Data:', error.value);
       return { data, error};
-    
     } catch (err) {
       error.value = err;
-      console.error('Error during registration:', err);
+      console.log('Error during registration:', error.value);
       throw(err)
     }
   };
-  return { name, email, password, submitForm};
+ 
+  return { name, email, password, submitForm, error};
 }
