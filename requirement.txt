@@ -1,3 +1,1 @@
-npm i bootstrap
-npm i vue-router
-npm i axios
+pnpm i vue-router
