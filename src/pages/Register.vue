@@ -56,15 +56,11 @@ import TextInput from '@/components/TextInput.vue';
 import Button from '@/components/Button.vue';
 import Error from '@/components/Error.vue';
 const emailerror = ref('');
-const { name, email, password, submitForm, error} = useRegisterForm();
-// const redirectToLogin = async () => {
-//     const {data, error} = await submitForm();
-//     if (!error.value) {
-//         console.log('Final Data', data.value);
-//         router.push({ name: 'Login' });
-//     } else {
-//         console.log('Final  error', error.value);
-//     }
-// }
+const { name, email, password, submitForm, data,error} = useRegisterForm();
+watch(data,()=>{
+    if(data.value && data.value){
+        router.push({name:'Login'});
+    }
+})
 </script>
  
