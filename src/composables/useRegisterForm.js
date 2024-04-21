@@ -40,5 +40,5 @@ export function useRegisterForm() {
     }
   };
  
-  return { name, email, password, submitForm, error};
+  return { name, email, password, submitForm,data,error};
 }
