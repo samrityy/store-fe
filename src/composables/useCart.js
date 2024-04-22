@@ -1,8 +1,9 @@
 import {defineStore} from 'pinia'
+const STORAGE_KEY = 'cart';
 export const useCart = defineStore("counter",{
     id:'cart',
     state: () => ({
-        items:[],
+        items: JSON.parse(sessionStorage.getItem(STORAGE_KEY)) || [],
         total: 0,
         count:0
     }),
@@ -11,14 +12,16 @@ export const useCart = defineStore("counter",{
             this.items.push(product)
             console.log(product.price)
             this.total += Number(product.price)
-            this.count+=1
             console.log(this.total)
-
+            this.persistCart()
         },
         removeFromCart(product){
             this.items = this.items.filter(items=> items.id !== product.id)
             this.total -= product.price
-            this.count -=1
-        }
+            this.persistCart()
+        },
+        persistCart() {
+            sessionStorage.setItem(STORAGE_KEY, JSON.stringify(this.items));
+          }
     }
 });
