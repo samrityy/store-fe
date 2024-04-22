@@ -1,9 +1,9 @@
 <template>
-    <div class="container mx-auto py-8">
+    <div class="container ml-auto py-6">
       <h2 class="text-5xl text-white text-center font-semibold mb-4 mx-auto">Cart</h2>
       <div v-if="items.length===0" class="text-center">Cart is Null</div>
       <div v-else class="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-1 gap-4">
-        <ul>
+        <ul >
         <li v-for ="(product,index) in items" :key="index">
         <div  class="bg-custom-light rounded-lg p-4 shadow-md"> 
           <img :src="product.image" :alt="product.title" class="w-16 h-16 object-cover mb-4">
@@ -11,6 +11,7 @@
           <p class="text-gray-800 font-semibold mb-2">${{ product.price }}</p>
           <button class="bg-custom-brown text-white py-2 px-4 rounded-md cursor-pointer transition-colors 
                                  duration-300 hover:custom-brown">+</button>  
+                                 {{ product.quantity}}
           <button class="bg-custom-brown text-white py-2 px-4 rounded-md cursor-pointer transition-colors duration-300 hover:custom-brown" @click="removeFromCart(index)">-</button>
           </div>
         </li>
@@ -26,11 +27,16 @@ import { useCart } from "@/composables/useCart"
 const cart = useCart()
 const items = cart.items
 const removeFromCart = cart.removeFromCart
-const addToCart = (product) => {
-cart.addToCart(product)
-}
-const total = computed(()=>{
-  return cart.total
-})
+// const addToCart = (product) => {
+// cart.addToCart(product)
+// }
+const total = computed(() => {  
+  let totalPrice = 0; 
+  for (let i = 0; i < items.length; i++) {
+    totalPrice += Number(items[i].price);
+  }
+  return totalPrice;
+});
+
 console.log('Total',total)
 </script>
