@@ -27,6 +27,11 @@ const routes = [
     component:Dashboard,
     name: 'Dashboard',
   },
+  {
+    path: '/cart',
+    component:Cart,
+    name: 'Cart',
+  },
 ]
   }
 ];
