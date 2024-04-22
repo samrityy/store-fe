@@ -22,12 +22,16 @@
 import { ref } from 'vue';
 import { useDashboard } from '@/composables/useDashboard.js';
 import Cart from '@/components/Cart.vue';
-import router from '@/router/router';
+// import router from '@/router/router';
+import Button from '@/components/Button.vue';
+import { useCart } from "@/composables/useCart"
 const selectedProduct = ref(null);
 const { data, error } = useDashboard();
+const cartStore = useCart(); 
 const addToCart = (index) => {
-  selectedProduct.value = data.value[index]; 
-  console.log('Selected Product', selectedProduct);
-  // router.push({ name: 'Cart', params: { product: selectedProduct } });
-}
+  console.log('Product', index);
+  //  const product = data.value[index];
+   cartStore.addToCart(data.value[index]); // Call addToCart action from the useCart store
+   console.log('Selected Product', index);
+ }
 </script>
