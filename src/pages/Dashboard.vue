@@ -1,5 +1,4 @@
 <template>
-  {{  }}
   <div class="container mx-auto py-8">
     <h2 class="text-5xl text-white text-center font-semibold mb-4 mx-auto">PRODUCTS</h2>
     <div v-if="data === null" class="text-center">Data is Null</div>
@@ -13,13 +12,13 @@
         <button @click="addToCart(index)" class="bg-custom-dark text-white font-semibold px-4 py-2 rounded hover:bg-custom-brown focus:outline-none focus:bg-custom-dark">Add to Cart</button>
       </div>
     </div>
-    <Cart :product="selectedProduct" />
+    <Cart />
   </div>
 </template>
 
 
 <script setup>
-import { ref } from 'vue';
+import { ref, watch } from 'vue';
 import { useDashboard } from '@/composables/useDashboard.js';
 import Cart from '@/components/Cart.vue';
 // import router from '@/router/router';
@@ -31,7 +30,7 @@ const cartStore = useCart();
 const addToCart = (index) => {
   console.log('Product', index);
   //  const product = data.value[index];
-   cartStore.addToCart(data.value[index]); // Call addToCart action from the useCart store
+   cartStore.addToCart(data.value[index]); 
    console.log('Selected Product', index);
  }
 </script>
