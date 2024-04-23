@@ -9,7 +9,7 @@
         <h3 class="text-lg font-semibold mb-2 h-18">{{ product.title }}</h3>
         <p class="text-gray-700 mb-2">{{ product.description.length > 100 ? product.description.slice(0, 100) + '...' : product.description }}</p>
         <p class="text-gray-800 font-semibold mb-2">${{ product.price }}</p>
-        <button @click="addToCart(index)" class="bg-custom-dark text-white font-semibold px-4 py-2 rounded hover:bg-custom-brown focus:outline-none focus:bg-custom-dark">Add to Cart</button>
+        <button @click="addToCart(index,product)" class="bg-custom-dark text-white font-semibold px-4 py-2 rounded hover:bg-custom-brown focus:outline-none focus:bg-custom-dark">Add to Cart</button>
       </div>
     </div>
     <Cart />
@@ -27,10 +27,10 @@ import { useCart } from "@/composables/useCart"
 const selectedProduct = ref(null);
 const { data, error } = useDashboard();
 const cartStore = useCart(); 
-const addToCart = (index) => {
+const addToCart = (index,product) => {
   console.log('Product', index);
   //  const product = data.value[index];
-   cartStore.addToCart(data.value[index]); 
+   cartStore.addToCart(data.value[index],index); 
    console.log('Selected Product', index);
  }
 </script>
