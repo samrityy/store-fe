@@ -9,10 +9,12 @@
           <img :src="product.image" :alt="product.title" class="w-16 h-16 object-cover mb-4">
           <h3 class="text-mg font-semibold mb-2 h-18">{{product.id }} {{ ' : ' }}{{ product.title }}</h3>
           <p class="text-gray-800 font-semibold mb-2">${{ product.price }}</p>
+          <button class="bg-custom-brown text-white py-2 px-4 rounded-md cursor-pointer transition-colors duration-300 hover:custom-brown" @click="decrement()">-</button>
+          <span class="p-3"> {{ quantity[product.id] }}</span>
           <button class="bg-custom-brown text-white py-2 px-4 rounded-md cursor-pointer transition-colors 
                                  duration-300 hover:custom-brown" @click="increment(product,index)"> + </button>  
-            <span class="p-3"> {{ quantity[product.id] }}</span>
-          <button class="bg-custom-brown text-white py-2 px-4 rounded-md cursor-pointer transition-colors duration-300 hover:custom-brown" @click="decrement()">-</button>
+            
+          
           </div>
         </li>
           </ul>
@@ -27,11 +29,7 @@ import { useCart } from "@/composables/useCart"
 const cart = useCart()
 const items = cart.items
 const quantity = cart.quantity
-
 const removeFromCart = cart.removeFromCart
-// const addToCart = (product) => {
-// cart.addToCart(product)
-// }
 const total = computed(() => {  
   let totalPrice = 0; 
   for (let i = 0; i < items.length; i++) {
@@ -44,4 +42,6 @@ const increment = (product,index) => {
    cart.increment(items[index],index);
  }
 console.log('Total',total)
+
+
 </script>
