@@ -10,6 +10,8 @@ export const useCart = defineStore("counter", {
     items: [],
     total: 0,
     quantity: [],
+    get_items: [],
+    quan: 1,
   }),
   actions: {
     addToCart(product, index) {
@@ -22,14 +24,15 @@ export const useCart = defineStore("counter", {
       }
       this.total += Number(product.price) * this.quantity[index + 1];
       console.log(this.total);
-      console.log(this.quantity[index]);
+      console.log(this.quantity[index + 1], "-------------------------");
+      this.quan = this.quantity[index + 1];
 
       try {
         const token = localStorage.getItem("token");
 
         const requestData = {
           product_id: product.id,
-          quantity: this.quantity[index],
+          quantity: this.quan,
         };
         const options = {
           method: "POST",
@@ -43,7 +46,7 @@ export const useCart = defineStore("counter", {
         useFetch("http://127.0.0.1:8000/cart/add-to-cart/", options)
           .then((res) => {
             data.value = res;
-            console.log(res, "res");
+            console.log(data, "res--------------------------------");
           })
           .catch((err) => {
             error.value = err;
@@ -55,8 +58,7 @@ export const useCart = defineStore("counter", {
     },
     increment(product, index) {
       this.quantity[product.id] += 1;
-      this.total += Number(product.price),
-      console.log(this.total);
+      (this.total += Number(product.price)), console.log(this.total);
     },
     removeFromCart(product) {
       this.items = this.items.filter((items) => items.id !== product.id);
