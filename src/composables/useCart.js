@@ -55,10 +55,43 @@ export const useCart = defineStore("counter", {
         console.error("Error during fetching data:", err);
       }
     },
-    increment(product, index) {
-      this.quantity[product.id] += 1;
-      (this.total += Number(product.price)), console.log(this.total);
+    delete_from_cart(product, index) {
+      const error = ref(null);
+      const data = ref(null);
+      console.log(product, "product-----------------------------")
+      try {
+        const token = localStorage.getItem("token");
+        const requestData = {
+          product_id: product.product.id,
+        };
+        console.log(requestData, "requestData-----------------------------");
+        const options = {
+          method: "DELETE",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: "Token " + token,
+          },
+          body: JSON.stringify(requestData),
+        };
+        useFetch("http://127.0.0.1:8000/cart/delete-from-cart/", options)
+          .then((res) => {
+            data.value = res;
+            console.log(get_data.value, "res--------------------------------");
+          })
+          .catch((err) => {
+            error.value = err;
+          });
+      } catch (err) {
+        error.value = err;
+        console.error("Error during fetching data:", err);
+      }
     },
+    increment(product, index) {
+      this.quantity[product.product.id] += 1;
+      this.total += Number(product.product.price)
+      console.log(this.total);
+    },
+    
 
     removeFromCart(product) {
       this.items = this.items.filter((items) => items.id !== product.id);
