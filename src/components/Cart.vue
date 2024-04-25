@@ -28,11 +28,12 @@ import {computed} from 'vue';
 import { useCart } from "@/composables/useCart"
 const cart = useCart()
 const items = cart.items
+const get_items=cart.get_items
 const quantity = cart.quantity
 const removeFromCart = cart.removeFromCart
 const total = computed(() => {  
   let totalPrice = 0; 
-  for (let i = 0; i < items.length; i++) {
+  for (let i = 0; i < items; i++) {
     totalPrice += Number(items[i].price)*quantity[items[i].id];
   }
   return totalPrice;
@@ -41,7 +42,11 @@ console.log("items",items)
 const increment = (product,index) => {
    cart.increment(items[index],index);
  }
+  const decrement = () => {
+    cart.decrement();
+  }
+
 console.log('Total',total)
-
-
+const get_cart=cart.get_all_cart();
+console.log('Get Cart',get_items)
 </script>
