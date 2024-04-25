@@ -26,6 +26,7 @@ import Button from '@/components/Button.vue';
 import { useCart } from "@/composables/useCart"
 const selectedProduct = ref(null);
 const { data, error } = useDashboard();
+console.log('Data', data);
 const cartStore = useCart(); 
 const addToCart = (index,product) => {
   console.log('Product', index);
@@ -33,4 +34,5 @@ const addToCart = (index,product) => {
    cartStore.addToCart(data.value[index],index); 
    console.log('Selected Product', index);
  }
+  
 </script>

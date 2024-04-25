@@ -3,7 +3,6 @@ import { ref } from "vue";
 import { useFetch } from "./fetch.js";
 const STORAGE_KEY = "cart";
 const error = ref(null);
-const get_data = ref(null);
 
 export const useCart = defineStore("counter", {
   id: "cart",
@@ -46,7 +45,7 @@ export const useCart = defineStore("counter", {
 
         useFetch("http://127.0.0.1:8000/cart/add-to-cart/", options)
           .then((res) => {
-            get_data.value = res;
+            this.get_items = res;
           })
           .catch((err) => {
             error.value = err;
@@ -60,30 +59,6 @@ export const useCart = defineStore("counter", {
       this.quantity[product.id] += 1;
       (this.total += Number(product.price)), console.log(this.total);
     },
-    get_all_cart() {
-      const error = ref(null);
-      try {
-        const token = localStorage.getItem("token");
-        const options = {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: "Token " + token,
-          },
-        };
-        useFetch("http://127.0.0.1:8000/cart/get-from-cart/", options)
-          .then((res) => {
-            this.get_items = res;
-            console.log(this.get_items, "res--------------------------------");
-          })
-          .catch((err) => {
-            error.value = err;
-          });
-      } catch (err) {
-        error.value = err;
-        console.error("Error during fetching data:", err);
-      }
-    },
 
     removeFromCart(product) {
       this.items = this.items.filter((items) => items.id !== product.id);
@@ -92,3 +67,31 @@ export const useCart = defineStore("counter", {
     },
   },
 });
+
+export function get_all_cart() {
+  const error = ref(null);
+  const get_data = ref(null);
+  try {
+    const token = localStorage.getItem("token");
+    const options = {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Token " + token,
+      },
+    };
+    useFetch("http://127.0.0.1:8000/cart/get-from-cart/", options)
+      .then((res) => {
+        get_data.value = res;
+        console.log(get_data.value, "res--------------------------------");
+      })
+      .catch((err) => {
+        error.value = err;
+      });
+  } catch (err) {
+    error.value = err;
+    console.error("Error during fetching data:", err);
+  }
+
+  return { get_data, error };
+}
